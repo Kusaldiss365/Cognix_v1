@@ -1,0 +1,18 @@
+Evaluate the user's answer to the following question.
+
+Question:
+{question}
+
+User Answer:
+{user_answer}
+
+Expected Answer (from official answers):
+{expected_answers}
+
+Context from Notes:
+{notes_context}
+
+Relevant Extracted Context:
+{similar_context}
+
+Provide a brief evaluation written in first person, as if speaking directly to the user. Then give specific, actionable feedback on what was correct or missing in the answer. Finally, provide an accuracy score (0-100%) reflecting how well the answer matches the expected answer.
