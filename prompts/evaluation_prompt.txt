@@ -9,10 +9,16 @@ User Answer:
 Expected Answer (from official answers):
 {expected_answers}
 
-Context from Notes:
-{notes_context}
+Instructions:
+- First, extract the key facts from the Expected Answer as a bullet list.
+- Then check if each fact is fully covered in the User Answer.
+- If any fact is missing, explain exactly which fact is missing.
+- Be strict but fair: minor wording differences do NOT reduce score and show the assumed answer to the user.
+- Your output MUST have exactly:
+  - A line starting with "Feedback:" explaining gaps or confirming completeness.
+  - A line starting with "Accuracy:" showing only an integer 0–100 (no % sign).
 
-Relevant Extracted Context:
-{similar_context}
+Example output:
+Feedback: Missing AOT, JIT compilation, and debugging support.
 
-Provide a brief evaluation written in first person, as if speaking directly to the user. Then give specific, actionable feedback on what was correct or missing in the answer. Finally, provide an accuracy score (0-100%) reflecting how well the answer matches the expected answer.
+Accuracy: 60
