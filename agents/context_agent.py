@@ -3,6 +3,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import PyPDFLoader
 
+
 class ContextAgent:
     def __init__(self, material_pdf_path, persist_directory):
         self.material_pdf_path = material_pdf_path
@@ -29,6 +30,7 @@ class ContextAgent:
                 persist_directory=self.persist_directory,
                 embedding_function=OllamaEmbeddings(model="llama3")
             )
+        # print("Vector store output: \n",self.vectorstore)
         return self.vectorstore
 
     def retrieve_context(self, query, top_k=3):

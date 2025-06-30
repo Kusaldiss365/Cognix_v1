@@ -18,7 +18,7 @@ class QuestionAgent:
 
         extracted = self.llm.invoke(prompt)
 
-        # ✅ Strict regex: match only lines starting with number + dot + space
+        # Strict regex: match only lines starting with number + dot + space
         pattern = re.compile(r"^\s*(\d+)\.\s+(.+)")
 
         self.questions = []
@@ -29,7 +29,7 @@ class QuestionAgent:
                 text = match.group(2).strip()
                 self.questions.append( (number, text) )
             else:
-                print(f"⚠️ Skipping non-matching line: {line}")
+                print(f"Skipping non-matching line: {line}")
 
     def get_question(self, index):
         return self.questions[index][1] if index < len(self.questions) else None

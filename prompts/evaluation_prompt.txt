@@ -1,24 +1,43 @@
-Evaluate the user's answer to the following question.
+self.prompt_template = """
+You are evaluating a student's answer to the following question. Use the Reference Answer as the only basis for scoring.
+Lecture Notes and Similar Context are provided for explanation purposes only — do not accept alternative answers unless they align with the Reference Answer.
 
 Question:
 {question}
 
-User Answer:
+Student Answer:
 {user_answer}
 
-Expected Answer (from official answers):
+Reference Answer (strictly use this for evaluation):
 {expected_answers}
 
+Lecture Notes Context (for reference only):
+{notes_context}
+
+Similar Context (for reference only):
+{similar_context}
+
 Instructions:
-- First, extract the key facts from the Expected Answer as a bullet list.
-- Then check if each fact is fully covered in the User Answer.
-- If any fact is missing, explain exactly which fact is missing.
-- Be strict but fair: minor wording differences do NOT reduce score and show the assumed answer to the user.
-- Your output MUST have exactly:
-  - A line starting with "Feedback:" explaining gaps or confirming completeness.
-  - A line starting with "Accuracy:" showing only an integer 0–100 (no % sign).
+- First, extract the key factual points from the Reference Answer as a bullet list.
+- Then check if each key point is clearly and fully addressed in the Student Answer.
+- Do not reduce marks for minor wording differences.
+- Do not reward alternative interpretations unless they exactly match facts in the Reference Answer.
+- Use the Lecture Notes and Similar Context only to support feedback, not to justify unrelated answers.
+- Be strict: if any key point from the Reference Answer is missing, score must be 80 or lower.
+
+Your output must follow this exact format:
+Feedback: <clearly explain what is missing or confirm all points are covered>
+Accuracy: <integer between 0 and 100, no % sign or explanation>
+
+Scoring Guide:
+- 100 = All key points from the Reference Answer are fully addressed with no gaps
+- 71–80 = One or two minor points missing
+- 51–70 = Several key points missing or vague
+- 31–50 = Major omissions; only a few correct facts
+- 1–30 = Mostly incorrect or irrelevant
+- 0 = Completely wrong or blank
 
 Example output:
-Feedback: Missing AOT, JIT compilation, and debugging support.
-
+Feedback: Missing details about JIT compilation, AOT benefits, and runtime performance impact.
 Accuracy: 60
+"""
