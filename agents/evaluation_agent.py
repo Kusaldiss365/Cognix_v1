@@ -14,11 +14,11 @@ class EvaluationAgent:
 
         self.reference_answers = {}
         if os.path.exists(answers_pdf_path):
-            print(f"✅ Found {answers_pdf_path}. Parsing reference answers...")
+            print(f"Found {answers_pdf_path}. Parsing reference answers...")
             full_text = load_pdf_text(answers_pdf_path)
             self.reference_answers = self.parse_answers(full_text)
         else:
-            print(f"⚠️ {answers_pdf_path} not found! Reference answers will be generated on-the-fly.")
+            print(f"{answers_pdf_path} not found! Reference answers will be generated on-the-fly.")
 
         self.notes_context = notes_context
 
@@ -58,7 +58,7 @@ class EvaluationAgent:
         if current_number is not None:
             answers[current_number] = " ".join(current_lines).strip()
 
-        print("✅ Parsed Reference Answers:")
+        print("Parsed Reference Answers:")
         for k, v in answers.items():
             print(f"{k}: {v}")
 
@@ -72,7 +72,7 @@ class EvaluationAgent:
         reference_answer = self.reference_answers.get(question_number, "")
 
         if not reference_answer:
-            print(f"⚠️ No reference answer found for Q{question_number}. Generating dynamically...")
+            print(f"No reference answer found for Q{question_number}. Generating dynamically...")
             context_text = "\n\n".join(doc.page_content for doc in similar_docs)
             gen_prompt = (
                 f"Generate a complete and factual answer for the following question using only the given context:\n\n"
@@ -82,7 +82,7 @@ class EvaluationAgent:
             )
             reference_answer = self.llm.invoke(gen_prompt).strip()
             self.reference_answers[question_number] = reference_answer
-            print(f"✅ Generated Reference Answer: {reference_answer}")
+            # print(f"Generated Reference Answer: {reference_answer}")
 
         # Shortcut: exact match
         if user_answer.strip().lower() == reference_answer.strip().lower():
@@ -104,8 +104,8 @@ class EvaluationAgent:
 
         response = self.llm.invoke(prompt)
 
-        print("\n=== LLM RESPONSE ===\n")
-        print(response)
+        # print("\n=== LLM RESPONSE ===\n")
+        # print(response)
 
         # Parse feedback and accuracy
         feedback = None

@@ -10,26 +10,29 @@ class OrchestratorAgent:
 
     def run(self):
         total = self.q_agent.total_questions()
-        results = []  # ⬅️ store tuples (question, user_answer, accuracy)
+        results = []  #store tuples (question, user_answer, accuracy)
 
         for i in range(total):
             question_text = self.q_agent.get_question(i)
             question_number = self.q_agent.get_question_number(i)
 
-            print(f"\n📘 Question {i + 1}/{total}: {question_text}\n")
+            print(f"\nQuestion {i + 1}/{total}: {question_text}\n")
 
             while True:
-                user_answer = input("📝 Your Answer (or type 'next' to skip, 'end' to quit): ").strip()
+                user_answer = input("Your Answer (or type 'next' to skip, 'end' to quit): ").strip()
                 print("\nLoading...")
 
                 if user_answer.lower() == "next":
-                    print("➡️ Moving to the next question...")
+                    print("Moving to the next question...")
                     break
                 if user_answer.lower() == "end":
-                    print("⏹️ Ending session. Goodbye!")
+                    print("Ending session. Goodbye!")
                     return
 
                 context_docs = self.c_agent.retrieve_context(question_text)
+
+                # print("Top k=3: ",context_docs)
+
                 reference_answer = self.e_agent.reference_answers.get(question_number, "")
                 raw_feedback, accuracy = self.e_agent.evaluate(
                     question_number,
@@ -52,10 +55,10 @@ class OrchestratorAgent:
                     feedback=feedback
                 )
 
-                print(f"\n✅ Accuracy: {accuracy}%")
-                print(f"\n💡 Reflection & Hint to Improve:\n{textwrap.fill(eval_reflection, width=80)}\n")
+                print(f"\nAccuracy: {accuracy}%")
+                print(f"\nReflection & Hint to Improve:\n{textwrap.fill(eval_reflection, width=80)}\n")
 
-                # ⬅️ Save result
+                # Save result
                 results.append({
                     "question": question_text,
                     "user_answer": user_answer,
@@ -63,15 +66,15 @@ class OrchestratorAgent:
                     "feedback": feedback
                 })
 
-                if accuracy >= 75:
-                    print("✅ Well done! Moving to the next question...\n")
+                if accuracy > 80:
+                    print("Well done! Moving to the next question...\n")
                     break
 
         # After all questions:
         self.provide_overall_feedback(results)
 
     def provide_overall_feedback(self, results):
-        print("\n=== 📊 Overall Performance Summary ===\n")
+        print("\n=== Overall Performance Summary ===\n")
 
         # Calculate average accuracy
         if results:
@@ -79,17 +82,17 @@ class OrchestratorAgent:
         else:
             avg_accuracy = 0
 
-        print(f"✅ Average Accuracy: {avg_accuracy:.1f}%")
+        print(f"Average Accuracy: {avg_accuracy:.1f}%")
 
         # Identify common gaps
-        low_scores = [r for r in results if r["accuracy"] < 75]
+        low_scores = [r for r in results if r["accuracy"] < 80]
         if low_scores:
-            print("\n⚠️ You may want to review the following topics:\n")
+            print("\nYou may want to review the following topics:\n")
             for r in low_scores:
                 print(f"• Q: {r['question']}")
                 print(f"  Feedback: {r['feedback']}\n")
         else:
-            print("\n🎉 Excellent! All answers were well above the passing mark.\n")
+            print("\nExcellent! All answers were well above the passing mark.\n")
 
         # Use ReflectionAgent for a final motivational wrap-up
         final_summary = self.r_agent.generate_final_summary(
@@ -98,5 +101,5 @@ class OrchestratorAgent:
             notes_context=self.e_agent.notes_context
         )
 
-        print("\n=== 💬 Final Guidance ===\n")
+        print("\n=== Final Guidance ===\n")
         print(textwrap.fill(final_summary, width=80))
