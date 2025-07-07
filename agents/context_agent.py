@@ -1,15 +1,16 @@
-from langchain_ollama import OllamaEmbeddings, OllamaLLM
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import PyPDFLoader
-
+from langchain_huggingface import HuggingFaceEmbeddings
+from utils.openai_config import get_openai_llm
 
 class ContextAgent:
     def __init__(self, material_pdf_path, persist_directory):
         self.material_pdf_path = material_pdf_path
         self.persist_directory = persist_directory
         self.vectorstore = None
-        self.llm = OllamaLLM(model="llama3")
+        self.llm = get_openai_llm()
+        self.embedding = HuggingFaceEmbeddings(model_name="intfloat/e5-base-v2")
 
     def ingest_and_index(self):
         loader = PyPDFLoader(self.material_pdf_path)
@@ -20,7 +21,7 @@ class ContextAgent:
 
         self.vectorstore = Chroma.from_documents(
             documents=docs,
-            embedding=OllamaEmbeddings(model="llama3"),
+            embedding=self.embedding,
             persist_directory=self.persist_directory
         )
 
@@ -28,7 +29,7 @@ class ContextAgent:
         if not self.vectorstore:
             self.vectorstore = Chroma(
                 persist_directory=self.persist_directory,
-                embedding_function=OllamaEmbeddings(model="llama3")
+                embedding_function=self.embedding
             )
         # print("Vector store output: \n",self.vectorstore)
         return self.vectorstore

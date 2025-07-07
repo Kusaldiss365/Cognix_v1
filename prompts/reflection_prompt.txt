@@ -7,8 +7,10 @@ Lecture Notes Context:
 {notes_context}
 
 Your task:
+- Answer like you are talking to the student.
 - Reflect on the feedback and lecture notes.
+- Briefly state whether the student's answer was mostly correct or had issues, based on the feedback.
 - DO NOT restate the full correct answer or give praise.
-- Mention which section, page, or keyword in the notes the student should review.
+- Mention which section, page, or keyword in the notes the student should review if the answer is not sufficient.
 - Give specific, constructive hints (under 100 words) in a single paragraph.
 - Be clear, factual, and actionable.

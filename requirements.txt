@@ -1,7 +1,7 @@
-langchain>=0.1.16
-langchain-community
-langchain-ollama
-langchain-chroma
-pypdf
 chromadb
-tqdm
+langchain
+langchain-openai
+openai
+pypdf
+python-dotenv
+sentence-transformers

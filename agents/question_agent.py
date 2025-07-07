@@ -1,11 +1,11 @@
 import re
 from utils.pdf_loader import load_pdf_text
-from langchain_ollama import OllamaLLM
+from utils.openai_config import get_openai_llm
 
 class QuestionAgent:
     def __init__(self, question_pdf_path):
         raw_text = load_pdf_text(question_pdf_path)
-        self.llm = OllamaLLM(model="llama3")
+        self.llm = get_openai_llm()
 
         prompt = (
             "You are a helpful assistant. Extract all clear and complete questions "
@@ -16,7 +16,7 @@ class QuestionAgent:
             "Questions:"
         )
 
-        extracted = self.llm.invoke(prompt)
+        extracted = self.llm.invoke(prompt).content
 
         # Strict regex: match only lines starting with number + dot + space
         pattern = re.compile(r"^\s*(\d+)\.\s+(.+)")

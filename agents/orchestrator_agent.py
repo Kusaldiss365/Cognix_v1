@@ -56,7 +56,7 @@ class OrchestratorAgent:
                 )
 
                 print(f"\nAccuracy: {accuracy}%")
-                print(f"\nReflection & Hint to Improve:\n{textwrap.fill(eval_reflection, width=80)}\n")
+                print(f"\nReflection & Hint to Improve:\n{textwrap.fill(eval_reflection.content, width=80)}\n")
 
                 # Save result
                 results.append({
