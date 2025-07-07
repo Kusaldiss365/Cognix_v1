@@ -1,11 +1,11 @@
-from langchain_ollama import OllamaLLM
+from utils.openai_config import get_openai_llm
 
 
 class ReflectionAgent:
     def __init__(self, prompt_path):
         with open(prompt_path, "r") as file:
             self.prompt_template = file.read()
-        self.llm = OllamaLLM(model="llama3")
+        self.llm = get_openai_llm()
 
     def reflect_evaluation(self, question, user_answer, expected_answers, notes_context, similar_context, feedback):
         prompt = self.prompt_template.format(
@@ -22,7 +22,7 @@ class ReflectionAgent:
     def __init__(self, prompt_path):
         with open(prompt_path, "r") as file:
             self.prompt_template = file.read()
-        self.llm = OllamaLLM(model="llama3")
+        self.llm = get_openai_llm()
 
     def reflect_evaluation(self, question, user_answer, expected_answers, notes_context, similar_context, feedback):
         prompt = self.prompt_template.format(

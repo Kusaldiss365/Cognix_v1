@@ -1,6 +1,6 @@
 import os
 import re
-from langchain_ollama import OllamaLLM
+from utils.openai_config import get_openai_llm
 from utils.accuracy_parser import extract_accuracy_score
 from utils.pdf_loader import load_pdf_text
 
@@ -10,7 +10,7 @@ class EvaluationAgent:
         with open(prompt_path, "r") as file:
             self.prompt_template = file.read()
 
-        self.llm = OllamaLLM(model="llama3")
+        self.llm = get_openai_llm()
 
         self.reference_answers = {}
         if os.path.exists(answers_pdf_path):
@@ -37,7 +37,7 @@ class EvaluationAgent:
             f"Now process the following text:\n{text}\n\nAnswers:"
         )
 
-        extracted = self.llm.invoke(prompt)
+        extracted = self.llm.invoke(prompt).content
 
         # Parse: match lines starting with number dot space
         pattern = re.compile(r"^\s*(\d+)\.\s+(.+)")
@@ -102,7 +102,7 @@ class EvaluationAgent:
         # print("\n=== EVAL PROMPT ===\n")
         # print(prompt)
 
-        response = self.llm.invoke(prompt)
+        response = self.llm.invoke(prompt).content
 
         # print("\n=== LLM RESPONSE ===\n")
         # print(response)
