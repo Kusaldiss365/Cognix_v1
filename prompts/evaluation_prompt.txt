@@ -1,6 +1,6 @@
 self.prompt_template = """
-You are evaluating a student's answer to the following question. Use the Reference Answer as the only basis for scoring.
-Lecture Notes and Similar Context are provided for explanation purposes only — do not accept alternative answers unless they align with the Reference Answer.
+You are evaluating a student's answer to the following question. Use the Reference Answer as the main guide for scoring.
+Lecture Notes and Similar Context are provided to help clarify meanings — you may accept valid equivalents only if they match the intent and factual accuracy of the Reference Answer.
 
 Question:
 {question}
@@ -8,36 +8,36 @@ Question:
 Student Answer:
 {user_answer}
 
-Reference Answer (strictly use this for evaluation):
+Reference Answer (use this as your main reference):
 {expected_answers}
 
-Lecture Notes Context (for reference only):
+Lecture Notes Context (for support only):
 {notes_context}
 
-Similar Context (for reference only):
+Similar Context (for support only):
 {similar_context}
 
 Instructions:
-- First, extract the key factual points from the Reference Answer as a bullet list.
-- Then check if each key point is clearly and fully addressed in the Student Answer.
-- Do not reduce marks for minor wording differences.
-- Do not reward alternative interpretations unless they exactly match facts in the Reference Answer.
-- Use the Lecture Notes and Similar Context only to support feedback, not to justify unrelated answers.
-- Be strict: if any key point from the Reference Answer is missing, score must be 80 or lower.
+- Extract key factual points from the Reference Answer as a bullet list.
+- Check if each key point is clearly and substantially addressed in the Student Answer.
+- Accept alternative phrasings if they capture the correct idea or fact.
+- Use the Lecture Notes and Similar Context only to help you understand the concepts — not to justify unrelated content.
+- Be reasonable: a few minor gaps or phrasing changes are acceptable, but missing core facts must reduce the score.
 
 Your output must follow this exact format:
-Feedback: <clearly explain what is missing or confirm all points are covered>
+Feedback: <clearly explain to the student what *you* think they missed or did well>
 Accuracy: <integer between 0 and 100, no % sign or explanation>
 
 Scoring Guide:
-- 100 = All key points from the Reference Answer are fully addressed with no gaps
-- 71–80 = One or two minor points missing
+- 100 = All key points are clearly and accurately addressed
+- 81–99 = One minor point slightly unclear or missing
+- 71–80 = One or two points missing, but core idea mostly captured
 - 51–70 = Several key points missing or vague
-- 31–50 = Major omissions; only a few correct facts
-- 1–30 = Mostly incorrect or irrelevant
-- 0 = Completely wrong or blank
+- 31–50 = Major omissions; only partial understanding
+- 1–30 = Mostly incorrect or off-topic
+- 0 = Completely incorrect or blank
 
 Example output:
-Feedback: Missing details about JIT compilation, AOT benefits, and runtime performance impact.
-Accuracy: 60
+Feedback: Good effort. However, you're missing the explanation of AOT benefits and the role of runtime performance. Mentioning JIT without detail reduces clarity.
+Accuracy: 70
 """

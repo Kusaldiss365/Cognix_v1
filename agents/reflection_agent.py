@@ -33,7 +33,7 @@ class ReflectionAgent:
             similar_context=similar_context,
             feedback=feedback
         )
-        return self.llm.invoke(prompt)
+        return self.llm.invoke(prompt).content
 
     def generate_final_summary(self, avg_accuracy, weak_points, notes_context):
         prompt = (
@@ -45,4 +45,4 @@ class ReflectionAgent:
             f"Lecture Notes Context: {notes_context}\n\n"
             "Your summary:"
         )
-        return self.llm.invoke(prompt)
+        return self.llm.invoke(prompt).content
