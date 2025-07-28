@@ -80,7 +80,7 @@ class EvaluationAgent:
                 f"Context:\n{context_text}\n\n"
                 f"Answer:"
             )
-            reference_answer = self.llm.invoke(gen_prompt).strip()
+            reference_answer = self.llm.invoke(gen_prompt).content.strip()
             self.reference_answers[question_number] = reference_answer
             # print(f"Generated Reference Answer: {reference_answer}")
 
