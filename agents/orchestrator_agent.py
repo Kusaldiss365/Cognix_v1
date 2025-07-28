@@ -103,3 +103,6 @@ class OrchestratorAgent:
 
         print("\n=== Final Guidance ===\n")
         print(textwrap.fill(final_summary, width=80))
+
+        return final_summary
+

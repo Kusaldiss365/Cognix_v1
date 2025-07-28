@@ -18,11 +18,15 @@ Similar Context (for support only):
 {similar_context}
 
 Instructions:
-- Extract key factual points from the Reference Answer as a bullet list.
+- First, check if the Student Answer is valid and related to the question.
+    - If the answer is clearly irrelevant, random, off-topic, or a placeholder like "hi", "can't answer", "dagdagdsag", "qwerty" etc., return:
+        Feedback: Your answer does not address the question. Please try to give a meaningful response related to the topic.
+        Accuracy: 0
+- Otherwise, extract key factual points from the Reference Answer as a bullet list.
 - Check if each key point is clearly and substantially addressed in the Student Answer.
 - Accept alternative phrasings if they capture the correct idea or fact.
 - Use the Lecture Notes and Similar Context only to help you understand the concepts — not to justify unrelated content.
-- Be reasonable: a few minor gaps or phrasing changes are acceptable, but missing core facts must reduce the score.
+- Be reasonable: a few minor gaps or phrasings are acceptable, but missing core facts must reduce the score.
 
 Your output must follow this exact format:
 Feedback: <clearly explain to the student what *you* think they missed or did well>
@@ -35,7 +39,7 @@ Scoring Guide:
 - 51–70 = Several key points missing or vague
 - 31–50 = Major omissions; only partial understanding
 - 1–30 = Mostly incorrect or off-topic
-- 0 = Completely incorrect or blank
+- 0 = Completely incorrect, blank, or irrelevant
 
 Example output:
 Feedback: Good effort. However, you're missing the explanation of AOT benefits and the role of runtime performance. Mentioning JIT without detail reduces clarity.
