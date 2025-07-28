@@ -1,47 +1,66 @@
-self.prompt_template = """
-You are evaluating a student's answer to the following question. Use the Reference Answer as the main guide for scoring.
-Lecture Notes and Similar Context are provided to help clarify meanings — you may accept valid equivalents only if they match the intent and factual accuracy of the Reference Answer.
+<<<<<<< Updated upstream
+Evaluate the user's answer to the following question.
+=======
+You are evaluating a student's answer to the following question. Use the Reference Answer as the main basis for scoring.
+Lecture Notes and Similar Context are provided to support feedback — not to justify unrelated answers.
+>>>>>>> Stashed changes
 
 Question:
 {question}
 
-Student Answer:
+User Answer:
 {user_answer}
 
-Reference Answer (use this as your main reference):
+<<<<<<< Updated upstream
+Expected Answer (from official answers):
 {expected_answers}
 
-Lecture Notes Context (for support only):
+Instructions:
+- First, extract the key facts from the Expected Answer as a bullet list.
+- Then check if each fact is fully covered in the User Answer.
+- If any fact is missing, explain exactly which fact is missing.
+- Be strict but fair: minor wording differences do NOT reduce score and show the assumed answer to the user.
+- Your output MUST have exactly:
+  - A line starting with "Feedback:" explaining gaps or confirming completeness.
+  - A line starting with "Accuracy:" showing only an integer 0–100 (no % sign).
+
+Example output:
+Feedback: Missing AOT, JIT compilation, and debugging support.
+
+=======
+Reference Answer (strictly use this for evaluation):
+{expected_answers}
+
+Lecture Notes Context (for reference only):
 {notes_context}
 
-Similar Context (for support only):
+Similar Context (for reference only):
 {similar_context}
 
 Instructions:
-- First, check if the Student Answer is valid and related to the question.
-    - If the answer is clearly irrelevant, random, off-topic, or a placeholder like "hi", "can't answer", "dagdagdsag", "qwerty" etc., return:
-        Feedback: Your answer does not address the question. Please try to give a meaningful response related to the topic.
-        Accuracy: 0
-- Otherwise, extract key factual points from the Reference Answer as a bullet list.
-- Check if each key point is clearly and substantially addressed in the Student Answer.
-- Accept alternative phrasings if they capture the correct idea or fact.
-- Use the Lecture Notes and Similar Context only to help you understand the concepts — not to justify unrelated content.
-- Be reasonable: a few minor gaps or phrasings are acceptable, but missing core facts must reduce the score.
+- Extract the key factual points from the Reference Answer as a bullet list.
+- Then check if each key point is clearly and fully addressed in the Student Answer.
+- Acknowledge partially correct or relevant points, even if some details are missing.
+- Do not penalize minor phrasing or grammar differences.
+- Use the Lecture Notes and Similar Context only to improve your explanation, not to justify off-topic answers.
+- If the Student Answer is **at least 10% relevant** (mentions a few key ideas), provide constructive feedback on what is missing or weak.
+- Only if the answer is **90% or more irrelevant**, completely off-topic, or nonsensical, use this exact feedback:
+  **"Your answer does not address the question. Please try to give a meaningful response related to the topic."**
 
 Your output must follow this exact format:
-Feedback: <clearly explain to the student what *you* think they missed or did well>
+Feedback: <clearly explain what is missing or confirm all points are covered>
 Accuracy: <integer between 0 and 100, no % sign or explanation>
 
 Scoring Guide:
-- 100 = All key points are clearly and accurately addressed
-- 81–99 = One minor point slightly unclear or missing
-- 71–80 = One or two points missing, but core idea mostly captured
-- 51–70 = Several key points missing or vague
-- 31–50 = Major omissions; only partial understanding
-- 1–30 = Mostly incorrect or off-topic
-- 0 = Completely incorrect, blank, or irrelevant
+- 100 = All key points from the Reference Answer are fully addressed
+- 81–99 = All major points are covered; minor gaps or rewording
+- 71–80 = One or two small points missing
+- 51–70 = Some key points missing or vague
+- 31–50 = Major omissions, but answer still shows partial relevance
+- 1–30 = Very few points mentioned; mostly incomplete or off-mark
+- 0 = Fully irrelevant, blank, or generic (only use if 90%+ is unrelated)
 
 Example output:
-Feedback: Good effort. However, you're missing the explanation of AOT benefits and the role of runtime performance. Mentioning JIT without detail reduces clarity.
-Accuracy: 70
-"""
+Feedback: Partially correct. You mentioned Android's founding year, but missed the names of the founders and the OS's original purpose.
+>>>>>>> Stashed changes
+Accuracy: 60
