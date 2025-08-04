@@ -123,4 +123,24 @@ class EvaluationAgent:
         if feedback is None:
             feedback = response  # fallback
 
-        return feedback, accuracy
+        return feedback, accuracy,reference_answer
+
+    def generate_direct_hint(self, question: str, similar_context: str,
+                             hint_prompt_path="prompts/hint_prompt.txt") -> str:
+        try:
+            with open(hint_prompt_path, "r") as file:
+                prompt_template = file.read()
+
+            prompt = prompt_template.format(
+                question=question,
+                notes_context=self.notes_context,
+                similar_context=similar_context
+            )
+
+            result = self.llm.invoke(prompt)
+            return getattr(result, "content", str(result)).strip()
+
+        except Exception as err:
+            print(f"❌ Failed to generate direct hint: {err}")
+            return "⚠️ Failed to generate hint due to internal error."
+

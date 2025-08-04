@@ -45,7 +45,7 @@ async def upload_and_initialize(
     session_id: str,
     notes: UploadFile = File(...),
     questions: UploadFile = File(...),
-    answers: UploadFile = File(...)
+    answers: UploadFile | None = File(None)
 ):
     user_dir = f"data/{session_id}"
     chroma_dir = f"chroma_db/{session_id}"
@@ -56,8 +56,9 @@ async def upload_and_initialize(
             shutil.copyfileobj(notes.file, f)
         with open(f"{user_dir}/questions.pdf", "wb") as f:
             shutil.copyfileobj(questions.file, f)
-        with open(f"{user_dir}/answers.pdf", "wb") as f:
-            shutil.copyfileobj(answers.file, f)
+        if answers:
+            with open(f"{user_dir}/answers.pdf", "wb") as f:
+                shutil.copyfileobj(answers.file, f)
 
         return JSONResponse(content={"status": "success", "message": "Files uploaded successfully."})
     except Exception as e:
@@ -71,10 +72,10 @@ async def chat_with_orchestrator(session_id: str, req: ChatRequest):
     answer = req.user_answer
     index = req.question_index
 
-    # 🔐 Generate a unique key per user per session
+    # Generate a unique key per user per session
     session_id, user_id, unique_session_key = get_or_create_user_and_session(session_id, user_id)
 
-    # 🧠 Create session if not exists
+    # Create session if not exists
     if unique_session_key not in chat_session:
         base_path = f"data/{session_id}"
         chroma_path = f"chroma_db/{session_id}"
@@ -82,7 +83,8 @@ async def chat_with_orchestrator(session_id: str, req: ChatRequest):
         question_agent = QuestionAgent(f"{base_path}/questions.pdf")
         context_agent = ContextAgent(f"{base_path}/notes.pdf", chroma_path)
         context_agent.ingest_and_index()
-        notes_context = context_agent.get_vectorstore().similarity_search("summary")[0].page_content
+        summary_docs = context_agent.get_vectorstore().similarity_search("summary")
+        notes_context = summary_docs[0].page_content if summary_docs else ""
 
         evaluation_agent = EvaluationAgent(EVAL_PROMPT, f"{base_path}/answers.pdf", notes_context)
         reflection_agent = ReflectionAgent(REFLECT_PROMPT)
@@ -92,7 +94,7 @@ async def chat_with_orchestrator(session_id: str, req: ChatRequest):
 
     session = chat_session[unique_session_key]
 
-    # 📍 Handle start of session
+    # Handle start of session
     if index == 0 and answer.strip() == "":
         return {
             "question": session.get_current_question(),
@@ -100,7 +102,7 @@ async def chat_with_orchestrator(session_id: str, req: ChatRequest):
             "total_questions": session.get_total_questions()
         }
 
-    # 📝 Evaluate answer
+    # Evaluate answer
     result = session.process_answer(answer)
 
     result["index"] = session.current_index

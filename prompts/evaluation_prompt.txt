@@ -1,9 +1,6 @@
-<<<<<<< Updated upstream
-Evaluate the user's answer to the following question.
-=======
-You are evaluating a student's answer to the following question. Use the Reference Answer as the main basis for scoring.
-Lecture Notes and Similar Context are provided to support feedback — not to justify unrelated answers.
->>>>>>> Stashed changes
+You are evaluating a student's answer to the following question. Use the Reference Answer as the main basis for scoring. Lecture Notes Context and Similar Context are provided to support your explanation — not to justify unrelated or off-topic answers.
+
+---
 
 Question:
 {question}
@@ -11,23 +8,6 @@ Question:
 User Answer:
 {user_answer}
 
-<<<<<<< Updated upstream
-Expected Answer (from official answers):
-{expected_answers}
-
-Instructions:
-- First, extract the key facts from the Expected Answer as a bullet list.
-- Then check if each fact is fully covered in the User Answer.
-- If any fact is missing, explain exactly which fact is missing.
-- Be strict but fair: minor wording differences do NOT reduce score and show the assumed answer to the user.
-- Your output MUST have exactly:
-  - A line starting with "Feedback:" explaining gaps or confirming completeness.
-  - A line starting with "Accuracy:" showing only an integer 0–100 (no % sign).
-
-Example output:
-Feedback: Missing AOT, JIT compilation, and debugging support.
-
-=======
 Reference Answer (strictly use this for evaluation):
 {expected_answers}
 
@@ -37,30 +17,42 @@ Lecture Notes Context (for reference only):
 Similar Context (for reference only):
 {similar_context}
 
+---
+
 Instructions:
-- Extract the key factual points from the Reference Answer as a bullet list.
-- Then check if each key point is clearly and fully addressed in the Student Answer.
-- Acknowledge partially correct or relevant points, even if some details are missing.
-- Do not penalize minor phrasing or grammar differences.
-- Use the Lecture Notes and Similar Context only to improve your explanation, not to justify off-topic answers.
-- If the Student Answer is **at least 10% relevant** (mentions a few key ideas), provide constructive feedback on what is missing or weak.
-- Only if the answer is **90% or more irrelevant**, completely off-topic, or nonsensical, use this exact feedback:
-  **"Your answer does not address the question. Please try to give a meaningful response related to the topic."**
+
+1. Extract the key factual points from the Reference Answer as a bullet list.
+2. Check whether each point is clearly and fully addressed in the User Answer.
+3. Be strict but fair:
+   - Do not penalize for minor wording or grammar differences.
+   - If a point is only partially mentioned, treat it as incomplete.
+4. If any point is missing, explicitly name it and explain what was left out.
+5. Use Lecture Notes and Similar Context only to improve feedback clarity — not to validate unrelated ideas.
+
+---
 
 Your output must follow this exact format:
+
 Feedback: <clearly explain what is missing or confirm all points are covered>
 Accuracy: <integer between 0 and 100, no % sign or explanation>
 
-Scoring Guide:
-- 100 = All key points from the Reference Answer are fully addressed
-- 81–99 = All major points are covered; minor gaps or rewording
-- 71–80 = One or two small points missing
-- 51–70 = Some key points missing or vague
-- 31–50 = Major omissions, but answer still shows partial relevance
-- 1–30 = Very few points mentioned; mostly incomplete or off-mark
-- 0 = Fully irrelevant, blank, or generic (only use if 90%+ is unrelated)
+---
 
-Example output:
-Feedback: Partially correct. You mentioned Android's founding year, but missed the names of the founders and the OS's original purpose.
->>>>>>> Stashed changes
-Accuracy: 60
+Scoring Guide:
+
+- 100 = All key points are fully and clearly addressed
+- 81–99 = All major points are covered; minor gaps or rewordings
+- 71–80 = One or two small points missing
+- 51–70 = Some key points are vague or missing
+- 31–50 = Major omissions, but some relevance shown
+- 1–30 = Very few correct ideas; mostly off-mark
+- 0 = Fully irrelevant, blank, or generic (use only if 90%+ is off-topic)
+
+---
+
+Special Case (use exactly as shown below):
+
+If the answer is 90% or more irrelevant:
+
+Feedback: Your answer does not address the question. Please try again after reviewing the notes.
+Accuracy: 0
