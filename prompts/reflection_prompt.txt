@@ -28,7 +28,7 @@ Instructions:
 
 1. First, check if the feedback says the answer was irrelevant, blank, or off-topic.
    - If yes, respond only with:
-     "Your response didn’t answer the question. Please try again after reviewing the notes."
+     "Your response was off-topic; review the notes and click the bulb on top-right for help."
 2. Determine if the answer was mostly correct, partially correct, or had major issues based on the feedback.
 3. Suggest what the student should review in the lecture notes.
 4. Provide a constructive tip for how to revise the answer — without revealing the full correct answer.

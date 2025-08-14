@@ -165,10 +165,11 @@ class OrchestratorSession:
             )
 
             # ---------- NEW: prepend random encouraging starter with page + title
-            page_num, title = self._first_page_and_title(context_docs)
-            if page_num and reflection:
-                starter = random.choice(ENCOURAGING_STARTERS).format(title=title, page=page_num)
-                reflection = starter + reflection[0].lower() + reflection[1:]
+            if accuracy > 0:
+                page_num, title = self._first_page_and_title(context_docs)
+                if page_num and reflection:
+                    starter = random.choice(ENCOURAGING_STARTERS).format(title=title, page=page_num)
+                    reflection = starter + reflection[0].lower() + reflection[1:]
 
         self.results.append({
             "question": question_text,
