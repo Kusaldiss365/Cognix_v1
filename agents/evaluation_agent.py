@@ -22,6 +22,15 @@ class EvaluationAgent:
 
         self.notes_context = notes_context
 
+    def _format_docs(self, docs):
+        blocks = []
+        for d in docs:
+            p = (d.metadata.get("page") or 0) + 1
+            title = d.metadata.get("page_title", "Notes")
+            blocks.append(f"[Page {p} – {title}]\n{d.page_content}")
+        return "\n\n".join(blocks)
+
+
     def parse_answers(self, text):
         """
         Use Llama3 to robustly extract numbered answers.
@@ -73,7 +82,7 @@ class EvaluationAgent:
 
         if not reference_answer:
             print(f"No reference answer found for Q{question_number}. Generating dynamically...")
-            context_text = "\n\n".join(doc.page_content for doc in similar_docs)
+            context_text = self._format_docs(similar_docs)
             gen_prompt = (
                 f"Generate a complete and factual answer for the following question using only the given context:\n\n"
                 f"Question: {question_text}\n\n"
@@ -86,9 +95,9 @@ class EvaluationAgent:
 
         # Shortcut: exact match
         if user_answer.strip().lower() == reference_answer.strip().lower():
-            return "Feedback: Perfect match! Your answer is exactly correct.", 100
+            return "Feedback: Perfect match! Your answer is exactly correct.", 100, reference_answer
 
-        context_text = "\n\n".join(doc.page_content for doc in similar_docs)
+        context_text = self._format_docs(similar_docs)
 
         # Fill prompt
         prompt = self.prompt_template.format(
@@ -123,7 +132,7 @@ class EvaluationAgent:
         if feedback is None:
             feedback = response  # fallback
 
-        return feedback, accuracy,reference_answer
+        return feedback, accuracy, reference_answer
 
     def generate_direct_hint(self, question: str, similar_context: str,
                              hint_prompt_path="prompts/hint_prompt.txt") -> str:

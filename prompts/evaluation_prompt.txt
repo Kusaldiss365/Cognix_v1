@@ -1,4 +1,4 @@
-You are evaluating a student's answer to the following question. Use the Reference Answer as the main basis for scoring. Lecture Notes Context and Similar Context are provided to support your explanation — not to justify unrelated or off-topic answers.
+You are evaluating a student's answer to the following question. Use the Reference Answer as the main basis for scoring. Lecture Notes Context and Similar Context are provided only to clarify concepts — do NOT include any page numbers, section titles, or navigation details in your feedback.
 
 ---
 
@@ -26,14 +26,14 @@ Instructions:
 3. Be strict but fair:
    - Do not penalize for minor wording or grammar differences.
    - If a point is only partially mentioned, treat it as incomplete.
-4. If any point is missing, explicitly name it and explain what was left out.
-5. Use Lecture Notes and Similar Context only to improve feedback clarity — not to validate unrelated ideas.
+4. If any point is missing, explicitly name it and explain what was left out — without referencing page numbers or titles.
+5. Use Lecture Notes and Similar Context only to make the explanation clearer — not to validate unrelated ideas or give navigation details.
 
 ---
 
 Your output must follow this exact format:
 
-Feedback: <clearly explain what is missing or confirm all points are covered>
+Feedback: <clearly explain what is missing or confirm all points are covered — without page numbers or titles>
 Accuracy: <integer between 0 and 100, no % sign or explanation>
 
 ---
