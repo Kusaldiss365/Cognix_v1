@@ -141,9 +141,9 @@ before evaluation, improving accuracy and constructiveness.
 
   Metric                     Single LLM   CogniX
   -------------------------- ------------ --------
-  Answer Scoring Alignment   81%          91%/
-  Constructiveness           72%          90%/
-  Accuracy & Relevance       78%          90%/
+  Answer Scoring Alignment   81%          91%\n
+  Constructiveness           72%          90%\n
+  Accuracy & Relevance       78%          90%\n
 
 CogniX demonstrated measurable improvements across all feedback quality
 metrics.
