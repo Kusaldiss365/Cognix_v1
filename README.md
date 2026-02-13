@@ -141,9 +141,9 @@ before evaluation, improving accuracy and constructiveness.
 
   Metric                     Single LLM   CogniX
   -------------------------- ------------ --------
-  Answer Scoring Alignment   81%          91%\
-  Constructiveness           72%          90%\
-  Accuracy & Relevance       78%          90%\
+  Answer Scoring Alignment   81%          91%
+  Constructiveness           72%          90%
+  Accuracy & Relevance       78%          90%
 
 CogniX demonstrated measurable improvements across all feedback quality
 metrics.
@@ -152,10 +152,10 @@ metrics.
 
 # Testing Strategy
 
--   **Unit Testing** -- Individual agent validation
--   **Integration Testing** -- Agent-to-agent data flow
--   **System Testing** -- End-to-end workflow validation
--   **Regression Testing** -- Ensured updates did not break feedback
+-   **Unit Testing** - Individual agent validation
+-   **Integration Testing** - Agent-to-agent data flow
+-   **System Testing** - End-to-end workflow validation
+-   **Regression Testing** - Ensured updates did not break feedback
     logic
 
 ------------------------------------------------------------------------
