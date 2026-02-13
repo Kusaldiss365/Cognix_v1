@@ -24,17 +24,17 @@ feedback models.
 
 Students often struggle with open-ended exam questions due to:
 
--   Stress and time pressure\
--   Difficulty organizing thoughts\
--   Lack of clarity about examiner expectations\
+-   Stress and time pressure
+-   Difficulty organizing thoughts
+-   Lack of clarity about examiner expectations
 -   Limited detailed feedback outside exams
 
 Most AI systems:
 
--   Focus on grading rather than improvement\
--   Provide static, generic feedback\
--   Rely on a single LLM\
--   Lack contextual awareness of lecture materials\
+-   Focus on grading rather than improvement
+-   Provide static, generic feedback
+-   Rely on a single LLM
+-   Lack contextual awareness of lecture materials
 -   Do not adapt to learner progress
 
 ------------------------------------------------------------------------
@@ -43,11 +43,11 @@ Most AI systems:
 
 CogniX introduces a **multi-agent AI architecture** that:
 
--   Retrieves contextual lecture material\
--   Extracts questions automatically\
--   Evaluates student answers\
--   Generates constructive improvement guidance\
--   Applies reflection over generated feedback\
+-   Retrieves contextual lecture material
+-   Extracts questions automatically
+-   Evaluates student answers
+-   Generates constructive improvement guidance
+-   Applies reflection over generated feedback
 -   Encourages iterative learning
 
 Instead of revealing correct answers directly, CogniX guides students
@@ -74,38 +74,38 @@ ChromaDB (Vector Store) + GPT-4o-mini
 
 ### 1️⃣ Orchestrator Agent
 
--   Controls overall session flow\
--   Manages retry logic\
--   Maintains session memory\
--   Routes between agents\
+-   Controls overall session flow
+-   Manages retry logic
+-   Maintains session memory
+-   Routes between agents
 -   Controls feedback iteration
 
 ### 2️⃣ Context Agent
 
--   Parses uploaded PDFs (lecture notes)\
--   Chunks and embeds text\
--   Stores embeddings in ChromaDB\
+-   Parses uploaded PDFs (lecture notes)
+-   Chunks and embeds text
+-   Stores embeddings in ChromaDB
 -   Retrieves relevant context using cosine similarity
 
 ### 3️⃣ Question Agent
 
--   Extracts numbered questions from PDFs\
--   Filters valid exam-style questions\
+-   Extracts numbered questions from PDFs
+-   Filters valid exam-style questions
 -   Prepares structured question context
 
 ### 4️⃣ Evaluation Agent
 
 -   Compares student answer against retrieved lecture material and
-    reference answers\
+    reference answers
 -   Identifies knowledge gaps, missing key points, and structural
-    issues\
+    issues
 -   Generates scoring alignment
 
 ### 5️⃣ Reflection Agent
 
--   Reviews Evaluation Agent output\
--   Improves clarity and constructiveness\
--   Removes overly direct answers\
+-   Reviews Evaluation Agent output
+-   Improves clarity and constructiveness
+-   Removes overly direct answers
 -   Enhances guidance quality
 
 ------------------------------------------------------------------------
@@ -113,21 +113,21 @@ ChromaDB (Vector Store) + GPT-4o-mini
 # Agentic Workflow
 
 1.  Student uploads lecture notes, question paper, and optional
-    reference answers\
-2.  Context is embedded into ChromaDB\
-3.  Student selects a question\
-4.  Student submits an answer\
-5.  Evaluation Agent analyzes response\
-6.  Reflection Agent refines feedback\
-7.  Constructive guidance returned\
-8.  Student improves answer\
+    reference answers
+2.  Context is embedded into ChromaDB
+3.  Student selects a question
+4.  Student submits an answer
+5.  Evaluation Agent analyzes response
+6.  Reflection Agent refines feedback
+7.  Constructive guidance returned
+8.  Student improves answer
 9.  Process repeats until understanding improves
 
 ------------------------------------------------------------------------
 
 # RAG Implementation
 
--   Embedding model: `intfloat/e5-base-v2`\
+-   Embedding model: `intfloat/e5-base-v2`
 -   Vector DB: ChromaDB\
 -   Similarity metric: Cosine similarity\
 -   LLM: GPT-4o-mini
