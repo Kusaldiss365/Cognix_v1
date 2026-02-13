@@ -139,8 +139,8 @@ before evaluation, improving accuracy and constructiveness.
 
 # Experimental Results
 
-  Metric                     Single LLM   CogniX/
-  -------------------------- ------------ --------/
+  Metric                     Single LLM   CogniX
+  -------------------------- ------------ --------
   Answer Scoring Alignment   81%          91%/
   Constructiveness           72%          90%/
   Accuracy & Relevance       78%          90%/
