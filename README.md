@@ -128,8 +128,8 @@ ChromaDB (Vector Store) + GPT-4o-mini
 # RAG Implementation
 
 -   Embedding model: `intfloat/e5-base-v2`
--   Vector DB: ChromaDB\
--   Similarity metric: Cosine similarity\
+-   Vector DB: ChromaDB
+-   Similarity metric: Cosine similarity
 -   LLM: GPT-4o-mini
 
 Instead of hallucinating answers, the model retrieves semantic context
@@ -141,9 +141,9 @@ before evaluation, improving accuracy and constructiveness.
 
   Metric                     Single LLM   CogniX
   -------------------------- ------------ --------
-  Answer Scoring Alignment   81%          91%
-  Constructiveness           72%          90%
-  Accuracy & Relevance       78%          90%
+  Answer Scoring Alignment   81%          91%\
+  Constructiveness           72%          90%\
+  Accuracy & Relevance       78%          90%\
 
 CogniX demonstrated measurable improvements across all feedback quality
 metrics.
@@ -152,9 +152,9 @@ metrics.
 
 # Testing Strategy
 
--   **Unit Testing** -- Individual agent validation\
--   **Integration Testing** -- Agent-to-agent data flow\
--   **System Testing** -- End-to-end workflow validation\
+-   **Unit Testing** -- Individual agent validation
+-   **Integration Testing** -- Agent-to-agent data flow
+-   **System Testing** -- End-to-end workflow validation
 -   **Regression Testing** -- Ensured updates did not break feedback
     logic
 
@@ -164,23 +164,23 @@ metrics.
 
 ### AI & NLP
 
--   GPT-4o-mini\
--   HuggingFace Embeddings (intfloat/e5-base-v2)\
--   RAG Architecture\
--   Prompt Engineering\
+-   GPT-4o-mini
+-   HuggingFace Embeddings (intfloat/e5-base-v2)
+-   RAG Architecture
+-   Prompt Engineering
 -   Multi-Agent Orchestration
 
 ### Backend
 
--   Python\
--   FastAPI\
--   ChromaDB\
+-   Python
+-   FastAPI
+-   ChromaDB
 -   PyPDFLoader
 
 ### Frontend
 
--   Next.js\
--   React\
+-   Next.js
+-   React
 -   Streaming chat interface
 
 ------------------------------------------------------------------------
@@ -209,10 +209,10 @@ npm run dev
 
 This project demonstrates:
 
--   Multi-agent system design\
--   RAG architecture implementation\
--   AI evaluation pipeline engineering\
--   Prompt optimization\
--   Vector database integration\
--   Frontend-backend orchestration\
+-   Multi-agent system design
+-   RAG architecture implementation
+-   AI evaluation pipeline engineering
+-   Prompt optimization
+-   Vector database integration
+-   Frontend-backend orchestration
 -   Research-driven AI experimentation
