@@ -192,16 +192,6 @@ export default function ChatPage() {
     }
   };
 
-  // useEffect(() => {
-  //   if (chatComplete) {
-  //     const timer = setTimeout(() => {
-  //       router.push("/");
-  //     }, 30000);
-
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [chatComplete]);
-
   const handleNextQuestion = async () => {
     try {
       const res = await fetch(`${baseUrl}/chat/${sessionId}`, {
