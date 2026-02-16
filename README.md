@@ -17,6 +17,19 @@ reflection, and fostering critical thinking.
 This project was designed and implemented as an individual AI-driven
 educational research system addressing key limitations in current AI
 feedback models.
+<br>
+<p align="center">
+  <a href="https://youtu.be/J7KggRkwXy8" target="_blank" rel="noopener noreferrer">
+    <img 
+      src="https://img.youtube.com/vi/J7KggRkwXy8/hqdefault.jpg" 
+      alt="ElectroMart Demo Video" 
+      width="640" 
+      style="border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);"
+    />
+    <br><br>
+    <strong style="font-size: 1.3em;">▶️ Watch Demo Video</strong>
+  </a>
+</p>
 
 ------------------------------------------------------------------------
 
