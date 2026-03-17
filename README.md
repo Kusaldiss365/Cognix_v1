@@ -1,4 +1,4 @@
-# 🧠 CogniX
+# CogniX
 
 ### Constructive Learning with a Multi-Agent AI System for Open-Ended Question Support
 
