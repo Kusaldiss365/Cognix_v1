@@ -85,7 +85,7 @@ ChromaDB (Vector Store) + GPT-4o-mini
 
 ## Multi-Agent Architecture
 
-### 1️⃣ Orchestrator Agent
+### 1. Orchestrator Agent
 
 -   Controls overall session flow
 -   Manages retry logic
@@ -93,20 +93,20 @@ ChromaDB (Vector Store) + GPT-4o-mini
 -   Routes between agents
 -   Controls feedback iteration
 
-### 2️⃣ Context Agent
+### 2. Context Agent
 
 -   Parses uploaded PDFs (lecture notes)
 -   Chunks and embeds text
 -   Stores embeddings in ChromaDB
 -   Retrieves relevant context using cosine similarity
 
-### 3️⃣ Question Agent
+### 3. Question Agent
 
 -   Extracts numbered questions from PDFs
 -   Filters valid exam-style questions
 -   Prepares structured question context
 
-### 4️⃣ Evaluation Agent
+### 4. Evaluation Agent
 
 -   Compares student answer against retrieved lecture material and
     reference answers
@@ -114,7 +114,7 @@ ChromaDB (Vector Store) + GPT-4o-mini
     issues
 -   Generates scoring alignment
 
-### 5️⃣ Reflection Agent
+### 5. Reflection Agent
 
 -   Reviews Evaluation Agent output
 -   Improves clarity and constructiveness
